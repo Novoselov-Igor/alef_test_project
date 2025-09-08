@@ -32,7 +32,7 @@ class StudentService
         $student = Student::with([
             'schoolClass',
             'lectures' => function ($query) {
-                $query->whereNotNull('completed_at');
+                $query->wherePivotNotNull('completed_at');
             }
         ])->find($id);
 

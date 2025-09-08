@@ -41,8 +41,9 @@ class Student extends Model
      */
     public function lectures(): BelongsToMany
     {
-        return $this->belongsToMany(Lecture::class, 'class_lecture_plan')
-            ->withPivot('completed_at')
+        return $this->belongsToMany(Lecture::class, 'class_lecture_plan', 'school_class_id', 'lecture_id')
+            ->wherePivot('school_class_id', $this->school_class_id)
+            ->withPivot('order', 'completed_at')
             ->withTimestamps();
     }
 }
